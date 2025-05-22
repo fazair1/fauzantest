@@ -1,6 +1,11 @@
 package com.fauzan.fauzantest.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "MstProduct")
@@ -16,6 +21,18 @@ public class Product {
 
     @Column(name = "HargaProduct")
     private int harga;
+
+    @ManyToOne
+    @JoinColumn(name = "IDProductCategory", foreignKey = @ForeignKey(name = "fk-to-productcategory"))
+    private ProductCategory productCategory;
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
 
     public int getHarga() {
         return harga;
